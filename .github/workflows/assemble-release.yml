@@ -1,27 +1,16 @@
 name: Assemble verified 1.5.7 delta
-run-name: Assemble ${{ inputs.tag }} from verified delta
+run-name: Reconstruct verified 1.5.7 release bytes
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: Existing 1.5.7 draft release tag
-        required: true
-        type: string
-      delta_name:
-        description: Uploaded COPY/LITERAL data archive
-        required: true
-        type: string
-      delta_sha256:
-        description: Independently verified archive SHA256
-        required: true
-        type: string
+  push:
+    branches: [main]
+    paths: [.github/workflows/assemble-release.yml]
 
 permissions:
   contents: write
 
 concurrency:
-  group: assemble-${{ inputs.tag }}
+  group: reconstruct-fixed-1.5.7
   cancel-in-progress: false
 
 jobs:
@@ -31,9 +20,9 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      RELEASE_TAG: ${{ inputs.tag }}
-      DELTA_NAME: ${{ inputs.delta_name }}
-      DELTA_SHA256: ${{ inputs.delta_sha256 }}
+      RELEASE_TAG: ${{ github.repository == 'ruoruo43/pocket-tavern-updates' && 'v1.5.7' || 'v1.5.7-source' }}
+      DELTA_NAME: ${{ github.repository == 'ruoruo43/pocket-tavern-updates' && 'delta-8353d295.zip' || 'delta-fcaa6282.zip' }}
+      DELTA_SHA256: ${{ github.repository == 'ruoruo43/pocket-tavern-updates' && '91af77fc50a6dd3e7eda9b349f530a8782d17028621a071128d456bf35d1d804' || 'f264456f88148745f982b5e9c4d959f7840c17fb2494019aa1b77bc68e74d02d' }}
     steps:
       - name: Reconstruct and verify the original signed bytes
         shell: bash
