@@ -2,7 +2,17 @@
 
 本仓库公开提供 Android ARM64 安装包、版本清单、SHA-256 校验和说明。开发源码及签名备份保存在私人仓库，不会作为本公开仓库附件发布。
 
-## 1.5.10 BUZZ 与前端显示修复预发布
+## 1.5.11 原角色卡安全预览修复预发布
+
+[下载 1.5.11 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.11-safe-card-data/pocket-tavern-1.5.11-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.11-safe-card-data)
+
+修复依靠消息读取脚本填充的心声/键值状态卡在安全预览中空白的问题：从当前消息填入只读卡片，保留原排版并支持原生折叠，原卡脚本仍不执行。完整脚本交互继续使用自动兼容。该有限结构适配不承诺任意脚本卡片均能静态还原。
+
+原角色卡和聊天在最终业务资源一致的 Android x86_64 架构对照包通过八项验收：原正文、两个候选回复的安全/自动显示，实际触摸折叠和历史重载；卡片内容与当前消息一致。名字旁问号在普通/高级状态隐藏，没有可见代码块按钮。Node 413/413、浏览器隔离预览 22 项、APK v2/v3、zipalign、同签名和 63 个生产文件核对通过。**生产 ARM64 手机、长期运行和真实图片服务待验收。** 本轮未重新调用 BUZZ，网络代码未改；下方 1.5.10 真实 BUZZ 结果为历史证据。
+
+**可直接覆盖 1.5.8 / 1.5.9 / 1.5.10 新签名版，建议先导出备份，无需卸载。** 用户原卡、聊天、模板和私人截图只留本地。公开附件仅 APK、更新清单、说明和校验；完整源码与脱敏验收归档到私人仓库。1.5.11 保持预发布，正式 latest 仍保留 v1.5.7。
+
+## 1.5.10 BUZZ 与前端显示修复预发布（历史记录）
 
 [下载 1.5.10 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.10-buzz-display-fixes/pocket-tavern-1.5.10-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.10-buzz-display-fixes)
 
