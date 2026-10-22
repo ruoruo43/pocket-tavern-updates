@@ -2,7 +2,17 @@
 
 本仓库公开提供 Android ARM64 安装包、版本清单、SHA-256 校验和说明。开发源码及签名备份保存在私人仓库，不会作为本公开仓库附件发布。
 
-## 1.5.9 模拟器修复预发布
+## 1.5.10 BUZZ 与前端显示修复预发布
+
+[下载 1.5.10 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.10-buzz-display-fixes/pocket-tavern-1.5.10-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.10-buzz-display-fixes)
+
+**1.5.8 / 1.5.9 新签名版可直接覆盖升级，建议先导出备份，无需卸载。** 修复名字旁问号在高级状态重新出现、显示正则生成的多 HTML 卡片只剩代码按钮，以及 BUZZ gemini-3.8-flash 原生非流式无正文的兼容。
+
+已用实际密钥验证 Base URL `https://buzzai.cc/v1`、模型 `gemini-3.8-flash`：最终 Android 业务资源复测非流式约 5.7 秒、流式约 5.0 秒均返回正文。原 `api.buzzgw.com` 对照仍有仅心跳无正文；应用不会自动替换域名，请在连接设置中改为已验证地址。服务商上游曾拒绝或提前断开，客户端不能保证其永久稳定。
+
+Node 413/413、浏览器预览 21 项、签名/对齐/62 个生产文件核对通过；最终业务资源对应的 x86_64 Android 对照包验证两张正则卡片、安全/自动模式、图片入口与普通/高级问号。**ARM64 手机、用户原角色卡与真实图片服务仍待验收。** 安全预览保留静态排版，完整动态卡片需自动兼容和相应扩展。本版保持预发布，正式 latest 保留 v1.5.7。
+
+## 1.5.9 模拟器修复预发布（历史记录）
 
 [下载 1.5.9 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.9-emulator-fixes/pocket-tavern-1.5.9-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.9-emulator-fixes)
 
