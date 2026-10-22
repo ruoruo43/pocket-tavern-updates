@@ -2,7 +2,17 @@
 
 本仓库公开提供 Android ARM64 安装包、版本清单、SHA-256 校验和说明。开发源码及签名备份保存在私人仓库，不会作为本公开仓库附件发布。
 
-## 1.5.8 新签名迁移预发布
+## 1.5.9 模拟器修复预发布
+
+[下载 1.5.9 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.9-emulator-fixes/pocket-tavern-1.5.9-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.9-emulator-fixes)
+
+**1.5.8 新签名版可以直接覆盖升级。1.5.6/1.5.7 原签名版仍须先备份迁移。** 名字旁自定义 API 问号随时间信息收起，安全预览修复本机图片，生成失败恢复控件，并补全首次输出和非流式正文超时保护。
+
+Node 406/406、最终 Android 架构对照包六种模拟中转场景、六项预览/图片入口及两项非流式场景通过。**BUZZ gemini-3.8-flash 模型列表通过，真实聊天仍未收到可确认回复；ARM64 真机与真实生图服务待验收。** 模拟器使用保留业务资源的 x86 对照包，不能代替生产 ARM64 真机验收。
+
+本版保持预发布，原 1.5.7 正式通道保留。完整源码和验收资料保存在私人开发仓库，签名继续使用 1.5.8 的新签名。
+
+## 1.5.8 新签名迁移预发布（历史记录）
 
 [下载 1.5.8 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.8-new-signer/pocket-tavern-1.5.8-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.8-new-signer)
 
