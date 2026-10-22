@@ -4,9 +4,9 @@
 
 ## 1.5.8 新签名迁移预发布
 
-**发布准备中：本地签名 APK 已完成，GitHub 完整 APK 尚未上线。** 大文件直传遭存储错误，正在上传校验分片；一次性服务端重组工作流等待用户明确批准。既有正式版入口仍在下方。
+[下载 1.5.8 完整 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.8-new-signer/pocket-tavern-1.5.8-arm64.apk) · [版本说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.8-new-signer)
 
-计划发布标签：`v1.5.8-new-signer`。
+安装只需下载 `.apk`；Release 中的 `.part` 和差分 ZIP 是上传校验资料，无需下载或拼接。
 
 **本次签名与旧版 1.5.6/1.5.7 不同，不能直接覆盖安装。先在旧版导出并确认备份，再卸载旧版、安装新包并恢复。未备份前请勿卸载。** 后续使用本次同一新签名的版本可覆盖本包。
 
