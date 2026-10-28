@@ -1,0 +1,72 @@
+name: Fixed 1.5.19 release transport
+run-name: Reconstruct 1.5.19 public-ea941382e3ef4d86
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fixed-1516-public-ea941382e3ef4d86
+  cancel-in-progress: false
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Reconstruct and verify pinned release bytes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,subprocess,zipfile
+          from pathlib import Path
+          FIXED = {'repo': 'ruoruo43/pocket-tavern-updates', 'private': False, 'releaseId': 426808749, 'tag': 'v1.5.19', 'delta': {'name': 'delta-e1dcbc0fb8b6.zip', 'bytes': 470471, 'sha256': '4ef55b71bd77612a71cdb036f84ebb6db504eaaed6a8fd74e83ae01a26990a9f'}, 'base': {'repo': 'ruoruo43/pocket-tavern-updates', 'tag': 'v1.5.18', 'asset': 'pocket-tavern-1.5.18-arm64.apk', 'bytes': 192046266, 'sha256': '1d9c7765d016346686b2c0749fef37b9dc941ba411350b84f6fdacae4377f509'}, 'output': {'name': 'pocket-tavern-1.5.19-arm64.apk', 'bytes': 192050362, 'sha256': 'e1dcbc0fb8b64bce56b3db4d0e0ed1363ee093bb0277b72f00aef25f3c38cc2d'}}
+          def need(ok,message):
+              if not ok:raise RuntimeError(message)
+          def gh(*args):return subprocess.run(['gh',*args],capture_output=True,text=True,check=True,timeout=180).stdout
+          def api(endpoint):return json.loads(gh('api',endpoint))
+          def sha(data):return hashlib.sha256(data).hexdigest()
+          repo=FIXED['repo'];tag=FIXED['tag'];release_id=FIXED['releaseId']
+          need(os.environ['GITHUB_REPOSITORY']==repo,'Wrong repository')
+          need(api('repos/'+repo)['private'] is FIXED['private'],'Repository privacy changed')
+          need(api('repos/ruoruo43/pocket-tavern-updates/releases/latest')['tag_name']=='v1.5.18','Latest baseline changed')
+          release=api(f'repos/{repo}/releases/{release_id}')
+          need(release['draft'] is True and release['tag_name']==tag,'Target is not the exact draft')
+          stage=Path('verified-delta');stage.mkdir()
+          delta_info=FIXED['delta'];base_info=FIXED['base'];output_info=FIXED['output']
+          gh('release','download',tag,'--repo',repo,'--pattern',delta_info['name'],'--dir',str(stage))
+          data=(stage/delta_info['name']).read_bytes()
+          need(len(data)==delta_info['bytes'] and sha(data)==delta_info['sha256'],'Delta transport differs')
+          with zipfile.ZipFile(stage/delta_info['name']) as archive:
+              need(sorted(archive.namelist())==['literal.bin','recipe.json'],'Unexpected delta ZIP entry')
+              need(archive.getinfo('recipe.json').file_size<=8*1024*1024 and archive.getinfo('literal.bin').file_size<=32*1024*1024,'Delta expansion too large')
+              recipe=json.loads(archive.read('recipe.json'));literal=archive.read('literal.bin')
+          need(recipe['schemaVersion']==1 and recipe['base']==base_info and recipe['output']==output_info,'Unpinned recipe')
+          need(len(literal)==recipe['literal']['bytes'] and sha(literal)==recipe['literal']['sha256'],'Literal differs')
+          need(0<len(recipe['parts'])<=100000,'Part count invalid')
+          gh('release','download',base_info['tag'],'--repo',repo,'--pattern',base_info['asset'],'--dir',str(stage))
+          base=(stage/base_info['asset']).read_bytes()
+          need(len(base)==base_info['bytes'] and sha(base)==base_info['sha256'],'Baseline differs')
+          final=stage/output_info['name'];total=0;digest=hashlib.sha256()
+          with final.open('xb') as stream:
+              for part in recipe['parts']:
+                  need(set(part) in ({'copy','bytes'},{'literal','bytes'}),'Unknown instruction')
+                  kind='copy' if 'copy' in part else 'literal';data=base if kind=='copy' else literal
+                  at=part[kind];size=part['bytes']
+                  need(type(at) is int and at>=0 and type(size) is int and size>0 and at+size<=len(data),'Invalid bounds')
+                  need(total+size<=output_info['bytes'],'Excess output')
+                  chunk=data[at:at+size];stream.write(chunk);digest.update(chunk);total+=size
+          need(total==output_info['bytes'] and digest.hexdigest()==output_info['sha256'],'Output differs')
+          release=api(f'repos/{repo}/releases/{release_id}')
+          need(release['draft'] is True and release['tag_name']==tag,'Draft changed')
+          existing=[asset for asset in release['assets'] if asset['name']==output_info['name']]
+          need(len(existing)<=1,'Duplicate output')
+          if not existing:gh('release','upload',tag,str(final),'--repo',repo)
+          release=api(f'repos/{repo}/releases/{release_id}')
+          need(release['draft'] is True,'Draft changed while uploading')
+          existing=[asset for asset in release['assets'] if asset['name']==output_info['name']]
+          need(len(existing)==1,'Output missing')
+          asset=existing[0]
+          need(asset['state']=='uploaded' and asset['size']==total and asset.get('digest')=='sha256:'+output_info['sha256'],'Uploaded output differs')
+          print('Exact signed/source bytes verified',output_info['name'],total,output_info['sha256'])
+          PY
