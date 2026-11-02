@@ -1,8 +1,32 @@
 # 掌中酒馆 APK 更新
 
+## 最新正式版：1.5.22
+
+[下载1.5.22完整ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.22/pocket-tavern-1.5.22-arm64.apk) · [正式发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.22)
+
+版本代码28，192058554字节。SHA256：95c27360a16272d0d54954a5d0f37ca29b2f13fe92d715e47852e66151ad9332。
+
+- 通知拒绝后不反复自动询问；权限或存储异常不阻断本地服务启动。
+- 常规完整静态卡片保留流式浏览状态，前后正文同步字号、行距和排版；动态卡、自定义嵌套与普通代码复制控件保留原兼容路径。
+- 多卡片刷新减少重复扫描：500卡片/1000消息负载中，全局Map访问500500→500，保留断开节点清理。
+
+22组发布检查、518项单元0跳过、4项导出、1178项原生断言、75项包内生产文件核对通过；最终Android15 x86_64同业务包完成22项检查。正式1.5.21直接升级保留原资料，实际卡片HTTP流式24段保持上下文，等待可停止并恢复发送，全新安装拒绝通知及冷启动通过。2026-11-02使用原BUZZ连接gemini-3.8-flash完成4次真实聊天，均HTTP200、有可见正文且发送状态恢复。
+
+ARM64真机、长期运行与真实图片生成未验收；真实服务结果仅代表当次测试。沿用1.5.8至1.5.21签名，可直接覆盖同签名版本保留资料。
+
+应用内固定更新清单：[update.json](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json)。安装包与更新JSON均使用固定SHA256和字节数；发布后需重新下载完整APK校验。
+
+完整对应源码、签名历史及详细验收资料保存在私有开发仓库，不把GitHub自动Source code ZIP当作完整源码。保留各开源组件许可证。
+
+---
+
+以下为1.5.21及更早版本的历史说明，按当时版本理解：
+
+## 历史资料：1.5.21
+
 本仓库提供 Android ARM64 安装包、更新清单与校验说明。开发源码、签名备份和详细验收资料保存在私有开发仓库。
 
-## 最新正式版：1.5.21
+### 历史正式版：1.5.21
 
 [下载1.5.21完整APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.21/pocket-tavern-1.5.21-arm64.apk) · [发行说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.21)
 
