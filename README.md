@@ -1,38 +1,37 @@
 # 掌中酒馆 APK 更新
 
-本仓库提供 Android ARM64 安装包、更新清单与校验说明。开发源码、签名备份和详细验证资料保存在私有开发仓库。
+本仓库提供 Android ARM64 安装包、更新清单与校验说明。开发源码、签名备份和详细验收资料保存在私有开发仓库。
 
-## 最新正式版：1.5.20
+## 最新正式版：1.5.21
 
-[下载1.5.20完整APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.20/pocket-tavern-1.5.20-arm64.apk) · [发行说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.20)
+[下载1.5.21完整APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.21/pocket-tavern-1.5.21-arm64.apk) · [发行说明与校验](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.21)
 
-基于已发布1.5.19完整源码合并，保留设置搜索、聊天行距、更新提示与现有资料。资料库继续分为角色卡、世界书和聊天记录，API连接/存储备份独立放在应用管理。
+本版将聊天、资料库、连接、设置整理为四个固定一级入口。资料库集中管理角色卡、世界书和聊天记录；连接独立管理 API；存储与备份归入设置。设置按用途分组，应用更新和扩展管理可从设置直接进入。
 
-本版补齐CUSTOM非流式错误正文的原请求截止与64KiB上限，清理正文、socket及取消监听器；成功正文与流式规则保留，不自动重试。最终APK的静默HTTP429错误体约180.9秒后明确结束等待、关闭上游并能继续聊天；超大错误体约1.4秒结束。
+统一系统返回与页面父级，保留资料库查询和阅读位置、聊天草稿及未保存连接。同一管理页切换不堆积历史；未保存连接跨页前保留确认；聊天恢复失败时保护设置深链。沿用1.5.20中转错误正文截止、资源释放和长聊天优化，核心、扩展、依赖与签名保持原已验证版本。
 
-长聊天只对确定的末尾追加定向检查，局部状态事件同帧合并，结构/设置/作用域变化仍全刷。1000行追加格式检查1001→1，十次局部状态检查10000→1；资料库概览少4个重复列表请求，650份样例lstat3831→1921，统计一致。这是减少本地工作，不代表模型提速。
+21组回归、518项单元（0跳过）、4项导出、1161项原生断言、23项Android15 x86_64安装验收及75个APK生产文件核对通过。模拟器完成同签名1.5.20覆盖升级和冷启动，原聊天、角色、世界书、笔记及显示偏好保留；本地模拟中转的流式及非流式聊天均有正文。安全卡片、名字旁问号处理、图片入口均检查通过。
 
-compression1.8.1升级1.8.2，释放中断响应的压缩资源并修复no-transform大小写处理。其余已验证核心、扩展和依赖保留：SillyTavern1.19.0、Node24.22.1、酒馆助手4.11.3及提示词模板1.17.9。
+本轮未调用真实BUZZ或其他付费服务；历史版本真实服务结果只代表当时环境。ARM64真机、长期运行及真实生图仍待相应设备和服务验收。
 
-20组当前源码回归、505项单元、4项导出、1107项原生断言、25项Android15 x86_64验收及73项包内生产文件核对通过。[BUZZ原地址](https://api.buzzgw.com/v1) 的gemini-3.8-flash实际重复流式、非流式与冷启动四次均输出，约4.1–5.7秒，保留19密钥无需重填。后续服务可用性仍由服务商决定。
+Android8.0+ / ARM64，versionCode27。沿用1.5.8–1.5.20签名，可保留资料覆盖安装。旧1.5.6/1.5.7按[迁移说明](MIGRATION-1.5.8.md)备份迁移。
 
-Android8.0+ / ARM64，versionCode26，沿用1.5.8–1.5.19签名，可保留应用覆盖安装。旧1.5.6/1.5.7签名不同，按[迁移说明](MIGRATION-1.5.8.md)备份迁移。ARM64真机、长期运行和真实生图本轮未验收，图片仅确认入口与配置。
-
-APK SHA256：37f2c4849e2c3f5c20e477030d9e762fff0fe69b1b0bd358cc8706646dc9641b
+APK：192054458字节。SHA256：e0e8a3e5cc79f9f8c24165d1a0d22dec9a67c31edd1ef099c4ff65e028c540e9
 
 ## 更新与功能入口
 
-- 应用内：聊天右上角“设置 → 更新与扩展 → 更新中心”。
+- 底部四入口：聊天 / 资料库 / 连接 / 设置。
+- 应用更新：设置 → 应用更新。
+- 扩展管理：设置 → 扩展管理。
+- 存储与备份：设置 → 存储与备份。
+- 图片生成与识别：聊天设置 → 图片前端；生图需要可用服务配置。
 - [最新正式发行页](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest)。
 - 固定更新源：https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json
-- API连接与备份：资料库 → 应用管理。
-- 图片生成与识别：聊天设置 → 图片前端；生图需配置可用服务，入口通过不等于真实出图验收。
-- 安全预览保留静态结构并隔离原卡脚本，完整交互仍需对应兼容模式和扩展。
 
-更新器核对大小、SHA256、包名、版本和证书，再交给Android确认安装。请先保存聊天与草稿。
+更新器核对大小、SHA256、包名、版本和证书，再交给Android确认安装。请先保存聊天与草稿。安全预览保留静态结构并隔离原卡脚本；复杂交互取决于对应兼容模式和扩展。
 
 ## 历史版本
 
-[1.5.19：设置搜索与行距](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.19) · [1.5.18：界面重组](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.18) · [1.5.17：运行环境与记忆缓存](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.17) · [1.5.16：暖白布局](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.16) · [1.5.15：HTML增量检查](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.15) · [1.5.14：阅读与分类设置](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.14)
+[1.5.20：中转与长聊天稳定性](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.20) · [1.5.19：设置搜索与行距](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.19) · [1.5.18：界面重组](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.18) · [1.5.17：运行环境与记忆缓存](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.17)
 
-历史实测只代表对应日期和环境。应用不附带AI账号、API密钥、私人卡片、聊天或生图服务。SillyTavern及预装扩展保留各自许可证；APK运行资产包含对应源码和许可。
+应用不附带AI账号、API密钥、私人卡片、聊天或生图服务。SillyTavern及预装扩展保留各自许可证，APK运行资产包含对应源码和许可。
