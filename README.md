@@ -1,6 +1,33 @@
 # 掌中酒馆 APK 更新
 
-## 最新正式版：1.5.22
+## 最新正式版：1.5.23
+
+[下载1.5.23完整ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.23/pocket-tavern-1.5.23-arm64.apk) · [正式发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.23)
+
+版本代码29，192062727字节。SHA256：142aec7aed9ad35f24b8c9a0e435c6aaa5fdae92345d55105a9d0ea76bcda8dd。
+
+- 空结构heartbeat不再延长有意义输出的等待时间；流式解析兼容逐字节BOM及单请求收尾。
+- 100卡片、100条height消息负载中，消息source比较由10000次降至100次、监听器由100个降至1个。
+- 原生下载取消后异步关闭属于本次任务的资源，避免关闭动作阻塞取消响应。
+- 原生APK构建输入绑定Java、Manifest、资源和构建配方，并核对APK资产、构建报告、当前输入及发布检查。
+- 设置检查点保存开始即同步禁用世界书等控件，保存结束恢复；避免忙碌期间世界书假勾选或点击操作丢失。
+- 回复图片开关同时遵守设置检查点和自身保存忙态；重叠操作结束前保持禁用，完成后实际切换可持久保存并保留草稿。
+
+本版新鲜完整回归：24组发布检查、567项单元测试（0跳过）、4项导出、1510项原生断言、290项生产文件绑定，以及27项Android同业务包检查通过。设置与回复图片保存竞争采用本地产生的合成世界书及受控HTTP暂停作浏览器验收；详细环境、升级保留资料、流式兼容、取消恢复和实际服务范围以本版私有验收报告为准。
+
+沿用现有正式签名，可覆盖同签名版本保留资料。ARM64真机、长期运行与真实图片生成未验收；模拟器及真实服务结论仅限本版实际报告范围，历史结果不代表当前验收。
+
+应用内固定更新清单：[update.json](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json)。安装包与更新JSON均使用固定SHA256和字节数；发布后需重新下载完整APK校验。
+
+完整对应源码、签名历史及详细验收资料保存在私有开发仓库，不把GitHub自动Source code ZIP当作完整源码。保留各开源组件许可证。
+
+---
+
+以下为1.5.22及更早版本的历史说明，按当时版本理解：
+
+## 历史资料：1.5.22
+
+### 历史正式版：1.5.22
 
 [下载1.5.22完整ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.22/pocket-tavern-1.5.22-arm64.apk) · [正式发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.22)
 
