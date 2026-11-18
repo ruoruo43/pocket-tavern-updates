@@ -1,6 +1,22 @@
 # 掌中酒馆 APK 更新
 
-## 最新正式版：1.5.24
+## 最新正式版：1.5.25
+
+[下载 ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.25/pocket-tavern-1.5.25-arm64.apk) · [正式发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.25) · [应用内更新清单](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json)
+
+版本代码 31，192,066,823 字节。APK SHA256 为 `cc0fc1c4edec267238e7fc7e0212e1e346d45158902335e2d1e678c17ddd2d63`。
+
+- 统一聊天、资料库、连接、设置及存储等页面的字号、间距、导航和按钮布局。
+- 长聊天可一键跳到最新消息。流式更新减少重复处理历史消息，安全预览卡片随对话保留。
+- 资料和存储加载失败可就地重试。图片设置保存期间保护草稿，保存后可继续对话。
+
+Android 15 x86_64 模拟器从 1.5.24 覆盖升级，本次通过 36 项验收。BUZZ 的 gemini-3.8-flash 在此次真实测试遇到上游无正文和 HTTP 502。模拟器本地重放已验证错误提示、停止等待和下一条正常发送。
+
+沿用 1.5.24 正式签名，可在同签名版本上覆盖安装。
+
+---
+
+## 历史正式版：1.5.24
 
 [下载1.5.24完整ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.24/pocket-tavern-1.5.24-arm64.apk) · [正式发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.24)
 
