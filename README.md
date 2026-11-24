@@ -1,6 +1,20 @@
 # 掌中酒馆 APK 更新
 
-## 最新正式版 1.5.26
+## 最新正式版 1.5.27
+
+手机打开「设置 → 应用更新 → 检查版本」，可以从 1.5.26 直接覆盖升级。安装包适用于 Android 8.0 及以上的 ARM64 设备。
+
+[下载 ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.27/pocket-tavern-1.5.27-arm64.apk) · [发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.27) · [应用内更新清单](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json)
+
+版本代码 33。APK 大小 192,120,368 字节，SHA-256 为 `41a2ba08855f129eefbce08386ac396dcb77ed0142b4f51221de5ef65f25ad90`。
+
+重做聊天、资料库、连接和设置界面，换用随应用离线加载的 Phosphor Icons。角色库和画廊分批加载，修复了冷启动、备份列表刷新和聊天记忆召回摘要问题。
+
+25 组回归通过，包含 609 项单元测试。Android 11 x86_64 对照包验证了覆盖安装、冷启动和测试资料保留。完整页面操作在 Chromium 验证。ARM64 真机、真实模型和生图服务待验收。
+
+---
+
+## 历史正式版 1.5.26
 
 手机内可通过「设置 → 应用更新 → 检查版本」升级。Android 8.0 及以上 ARM64 设备可用，沿用 1.5.25 签名。
 
