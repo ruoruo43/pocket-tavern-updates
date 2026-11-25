@@ -1,6 +1,20 @@
 # 掌中酒馆 APK 更新
 
-## 最新正式版 1.5.27
+## 最新正式版 1.5.28
+
+手机底栏打开「设置 → 应用更新 → 检查版本」，点「下载并更新」后按 Android 提示确认安装。1.5.27 和 1.5.28 本地试用包可覆盖升级。安装包适用于 Android 8.0 及以上的 ARM64 设备。
+
+[下载 ARM64 APK](https://github.com/ruoruo43/pocket-tavern-updates/releases/download/v1.5.28/pocket-tavern-1.5.28-arm64.apk) · [发行说明](https://github.com/ruoruo43/pocket-tavern-updates/releases/tag/v1.5.28) · [应用内更新清单](https://github.com/ruoruo43/pocket-tavern-updates/releases/latest/download/update.json)
+
+版本代码 35。APK 大小 192,427,568 字节，SHA-256 为 `81d36b6ce2f21014ee926e3a913f8c1c61b4e0cb1c9909b57d9beda90eb0569e`。
+
+SillyTavern 核心更新到 1.19.1，预装酒馆助手更新到 4.12.2，预装提示词模板补回本地 EJS Worker，显示版本为 1.17.9。在「设置 → 技能」可以安装、启用、停用或卸载写作技能，并按需选择参考文档。
+
+26 组回归通过，包含 616 项单元测试。ARM64 真机安装及真实模型调用待验收。
+
+---
+
+## 历史正式版 1.5.27
 
 手机打开「设置 → 应用更新 → 检查版本」，可以从 1.5.26 直接覆盖升级。安装包适用于 Android 8.0 及以上的 ARM64 设备。
 
